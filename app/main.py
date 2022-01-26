@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from tortoise.contrib.starlette import register_tortoise
 
-from app.apis.api_v1.api import api_router
+from app.api import api_router
 from app.core.config import get_app_settings
 
 def get_application() -> FastAPI:

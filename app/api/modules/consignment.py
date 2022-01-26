@@ -3,7 +3,7 @@ from typing import List
 
 from fastapi import APIRouter
 
-from app.repos import all_consignments
+from app.repos import all_consignments, add_consignment
 from app.schemas import list_consignment_schema, add_consignment_schema
 
 router = APIRouter()
@@ -12,8 +12,7 @@ router = APIRouter()
 
 @router.post("/consignment", response_model=add_consignment_schema)
 async def consignment(data: add_consignment_schema):
-    print(data.dict())
-    return await add_consignment_schema(data.dict())
+    return await add_consignment(data.dict())
 
 @router.get("/consignments")
 async def all_consignment():
