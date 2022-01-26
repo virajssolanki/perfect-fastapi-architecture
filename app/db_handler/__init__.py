@@ -1,0 +1,1 @@
+#database queries that need to run without orm are managed in this folder

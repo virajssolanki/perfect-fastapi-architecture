@@ -5,11 +5,11 @@ from tortoise.contrib.starlette import register_tortoise
 from app.apis.api_v1.api import api_router
 from app.core.config import get_app_settings
 
-
 def get_application() -> FastAPI:
     settings = get_app_settings()
 
     application = FastAPI(**settings.fastapi_kwargs)
+
 
     application.add_middleware(
         CORSMiddleware,
