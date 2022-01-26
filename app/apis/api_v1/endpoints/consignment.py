@@ -12,6 +12,7 @@ router = APIRouter()
 
 @router.post("/consignment", response_model=add_consignment_schema)
 async def consignment(data: add_consignment_schema):
+    print(data.dict())
     return await add_consignment_schema(data.dict())
 
 @router.get("/consignments")
