@@ -17,19 +17,24 @@ class AppSettings(BaseAppSettings):
     title: str = "FastAPI example application"
     version: str = "0.0.1"
 
-    #tortoise seetings
+    #tortoise settings
     modules: dict = {"models": ["app.models", 'aerich.models',] }   
     database_url: PostgresDsn
     generate_schemas: bool = True
 
+    # smtp_server: str
+    # mail_sender = 'noreply@example.com'
+
     max_connection_count: int = 10
     min_connection_count: int = 10
 
-    secret_key: SecretStr
+    secret_key: str
 
     api_prefix: str = "/api"
 
     jwt_token_prefix: str = "Token"
+    token_algorithm = 'HS256'
+    token_lifetime = 60 * 60
 
     allowed_hosts: List[str] = ["*"]
 

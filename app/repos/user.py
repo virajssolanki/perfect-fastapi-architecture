@@ -1,14 +1,72 @@
-from app.schemas import *
+from datetime import datetime, timedelta
+from pydantic import UUID4
+import uuid
 from typing import List
 
-#write crud and business logics here
-async def add_consignment(data:add_consignment_schema) -> add_consignment_schema:
-    consignment = await Consignment.create(**data)
-    return consignment
+from jose import jwt
+from passlib.context import CryptContext
 
-async def all_consignments() -> list_consignment_schema:
-    consignments = await list_consignment_schema.from_queryset(Consignment.all())
-    return consignments
+from app.schemas import *
+
+from app.core.config import get_app_settings
+
+settings = get_app_settings()
+
+
+class Auth:
+    password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+    @classmethod
+    def get_password_hash(self, password: str) -> str:
+        return self.password_context.hash(password)
+
+    @staticmethod
+    def get_token(data: dict, expires_delta: int):
+        pass
+        to_encode = data.copy()
+        to_encode.update({
+            "exp": datetime.utcnow() + timedelta(seconds=expires_delta),
+            "iss": settings.title
+        })
+        return jwt.encode(
+            to_encode,
+            settings.secret_key,
+            algorithm=settings.token_algorithm
+        )
+
+    @staticmethod
+    def get_access_token(user_id: UUID4):
+        jti = uuid.uuid4()
+        claims = {
+            "sub": str(user_id),
+            "scope": "registration",
+            "jti": str(jti)
+        }
+        return {
+            "jti": jti,
+            "token": Auth.get_token(
+                claims,
+                settings.token_lifetime
+            )
+        }
+
+
+
+
+
+
+
+
+
+
+#write crud and business logics here
+# async def add_consignment(data:add_consignment_schema) -> add_consignment_schema:
+#     consignment = await Consignment.create(**data)
+#     return consignment
+
+# async def all_consignments() -> list_consignment_schema:
+#     consignments = await list_consignment_schema.from_queryset(Consignment.all())
+#     return consignments
     
 # class Status(BaseModel):
 #     message: str

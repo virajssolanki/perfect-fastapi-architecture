@@ -1,13 +1,45 @@
-# import logging
-# from datetime import datetime, timedelta
-# from pathlib import Path
-# from typing import Any, Dict, Optional
+import logging
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import Any, Dict, Optional
 
-# import emails
-# from emails.template import JinjaTemplate
-# from jose import jwt
+import emails
+from emails.template import JinjaTemplate
+from jose import jwt
 
-# from app.core.config import settings
+from app.core.config import settings
+
+from smtplib import SMTP
+from email.message import EmailMessage
+
+from app.core.config import get_app_settings
+
+settings = get_app_settings()
+
+
+
+# class Mailer:
+#     @staticmethod
+#     def send_message(content: str, subject: str, mail_to: str):
+#         message = EmailMessage()
+#         message.set_content(content)
+#         message['Subject'] = subject
+#         message['From'] = settings.MAIL_SENDER
+#         message['To'] = mail_to
+#         SMTP(settings.SMTP_SERVER).send_message(message)
+
+#     @staticmethod
+#     def send_confirmation_message(token: str, mail_to: str):
+#         confirmation_url = '{}{}/auth/verify/{}'.format(settings.BASE_URL, settings.API_PREFIX, token)
+#         message = '''Hi!
+
+# Please confirm your registration: {}.'''.format(confirmation_url)
+#         Mailer.send_message(
+#             message,
+#             'Please confirm your registration',
+#             mail_to
+#         )
+
 
 
 # def send_email(

@@ -1,2 +1,2 @@
-from .consignment import *
+from .user import *
 # from .user import *
