@@ -8,6 +8,8 @@ from pydantic import EmailStr, SecretStr
 class CreateUserSchema(BaseModel):
     email: EmailStr
     password: SecretStr
+    first_name: str
+    last__name: str
 
 class LoginSchema(BaseModel):
     email: EmailStr
