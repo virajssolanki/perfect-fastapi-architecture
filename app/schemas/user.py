@@ -9,6 +9,10 @@ class CreateUserSchema(BaseModel):
     email: EmailStr
     password: SecretStr
 
+class LoginSchema(BaseModel):
+    email: EmailStr
+    password: SecretStr
+
 user_schema = pydantic_model_creator(
     User, 
     name='UserSchema', 

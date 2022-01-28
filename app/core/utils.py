@@ -51,7 +51,7 @@ settings = get_app_settings()
 #     assert settings.EMAILS_ENABLED, "no provided configuration for email variables"
 #     message = emails.Message(
 #         subject=JinjaTemplate(subject_template),
-#         html=JinjaTemplate(html_template),
+#         html=JinjaTemplate(html_users_routertemplate),
 #         mail_from=(settings.EMAILS_FROM_NAME, settings.EMAILS_FROM_EMAIL),
 #     )
 #     smtp_options = {"host": settings.SMTP_HOST, "port": settings.SMTP_PORT}
